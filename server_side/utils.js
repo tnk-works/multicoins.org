@@ -12,7 +12,8 @@ exports.coinsInfo = {
         0x30 : require("./coinAPI/litecoin"), 
         0x1e : require("./coinAPI/dogecoin"),
         0x6f : require("./coinAPI/bitcoin_test"), 
-        0x37 : require("./coinAPI/peercoin")
+        0x37 : require("./coinAPI/peercoin"),
+        0x08 : require("./coinAPI/novacoin")
     };
 
 exports.scryptParams = {

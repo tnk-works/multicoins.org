@@ -35,4 +35,35 @@ exports.handle = function(app)
             res.end(JSON.stringify(ret));
         });
     });
+    
+    app.get('/api/v1/address/balance/nvc/:addr_array', function (req, res) {
+        if (!req.params.addr_array.length)
+        {
+            res.end(JSON.stringify({status: false, message: "bad request"}));
+            return;
+        }
+        
+        const arrayAddr = req.params.addr_array.split(',');
+        var retArray = [];
+        
+        arrayAddr.forEach(function(addr, i, array) {
+            const address = addr;
+            console.log("GetBalance NVC adress: "+address);
+            utils.getJSONssl( 'https://api.novaco.in/getbalance/'+address+'/full', function(data) {
+                //data = [].concat(data);
+                //data.forEach(function(element) {
+                //    element.balance = (parseFloat(element.final_balance)/100000000.0).toFixed(8);
+                //});
+                //callback({status: 'success', data: data});
+                data.address = address;
+                console.log(JSON.stringify(data));
+                retArray.push(data);
+                
+                if (retArray.length == arrayAddr.length)
+                    res.end(JSON.stringify({status: 'success', result: retArray}));
+            });      
+
+        });
+        
+    });
 };

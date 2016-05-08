@@ -4,32 +4,24 @@ const utils = require('../utils.js');
 const alerts = require('../alerts');
 const $ = require('jquery');
 
-//eb9e796f9a84f5c79e7fc59600bc3877
-const token = '?token=eb9e796f9a84f5c79e7fc59600bc3877';
-
-exports.netID = 0x1e;
-exports.name = "dogecoin";
-exports.Shortname = "DOGE";
+exports.netID = 0x08;
+exports.name = "novacoin";
+exports.Shortname = "NVC";
 exports.fee = 0.0001;
+
+const urlAPI = "/api/v1/address/";
 
 exports.getBalance = function(arrayAddr, callback)
 {
-    var addrs = "";
-    arrayAddr.forEach(function(addr, i, array) {
-        if (i < array.length-1) addrs += addr + ";";
-        else addrs += addr;
-    });
-    
-    console.log("GetBalance "+exports.Shortname+" param: "+addrs);
-    $.getJSON( 'https://api.blockcypher.com/v1/doge/main/addrs/'+addrs+'/balance' + token, function(data) {
-        data = [].concat(data);
+    console.log('get balance ' + urlAPI + "balance/" + arrayAddr.toString());
+    $.getJSON( urlAPI + "balance/nvc/" + arrayAddr.toString(), function(data) {
+        data = [].concat(data.result);
         data.forEach(function(element) {
-            element.balance = utils.MakeFloat((parseFloat(element.final_balance)/100000000.0).toFixed(8));
+            element.balance = utils.MakeFloat((parseFloat(element.balance)/1000000.0).toFixed(8));
         });
-        callback({status: 'success', data: data});
+        callback({status: 'success', data: data});    
     })
-    .fail(function(e) {
-        console.log((e && e.message) ? e.message : JSON.stringify(e));
+    .fail(function() {
         callback(utils.JSONreturn('false', 'error'));
     });      
 
