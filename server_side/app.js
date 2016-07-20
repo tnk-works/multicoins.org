@@ -172,7 +172,7 @@ exports.UpdateKeyPairsTableHTML = function()
                 alerts.Alert("Your private key", privkey);
         };
  
-        var btnClose = $('<button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>');
+        var btnClose = $('<button class="btn_icon"><i class="material-icons">delete</i></button>');
         btnClose[0].onclick = function(){
             utils.deleteKey("KeyPairs", address);
             exports.UpdateKeyPairsTableHTML();
@@ -215,21 +215,21 @@ exports.UpdatePublicKeysTableHTML = function()
         const tdLabel = $("<td >"+strLabel +"</td>");
         
         //button "Edit"
-        var btnEdit = $('<button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>');
+        var btnEdit = $('<button class="btn_icon"><i class="material-icons">edit</i></button>');
          btnEdit[0].onclick = function(){
              require('./modalEvents').onEditSendToAddressLabel(network, address, strLabel, strCoinShortName);
         };
         const tdEdit= $("<td ></td>").append(btnEdit);
         
         //button "Send"
-        var btnSend = $('<button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>');
+        var btnSend = $('<button class="btn_icon"><i class="material-icons">file_upload</i></button>');
          btnSend[0].onclick = function(){
              require('./sendTransaction').onOpenDialog(network, address, strLabel, strCoinShortName);
         };
         const tdSend= $("<td ></td>").append(btnSend);
 
         //button "Delete"
-        var btnClose = $('<button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>');
+        var btnClose = $('<button class="btn_icon"><i class="material-icons">delete</i></button>');
         btnClose[0].onclick = function(){
             utils.deleteKey("PublicKeys", address);
             exports.UpdatePublicKeysTableHTML();
