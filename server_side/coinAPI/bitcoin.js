@@ -10,7 +10,7 @@ const urlAPIpush = "https://btc.blockr.io/api/v1/tx/push";
 exports.netID = 0;
 exports.name = "bitcoin";
 exports.Shortname = "BTC";
-exports.fee = 0.0001;
+exports.fee = 0.0002;
 
 exports.getBalance = function(arrayAddr, callback)
 {

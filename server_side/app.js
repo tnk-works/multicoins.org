@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const utils = require('./utils.js');
 const $ = require('jquery');
 const alerts = require('./alerts');
+const bitcoin = require('multicoinjs-lib');
 
 
 exports.EncodeWallet = function(password)
@@ -164,9 +165,16 @@ exports.UpdateKeyPairsTableHTML = function()
         //console.log('jsonSavedKeyPairs[key].network='+jsonSavedKeyPairs[key].network);
         
         const tdCoin = $('<td>' + utils.coinsInfo[jsonSavedKeyPairs[key].network].name+"</td>");
-        const tdPublic = $('<td>'+address+"</td>");
+        const tdPublic = $('<td><a href="#">'+address+"</a></td>");
         const tdBalance = $('<td>'+jsonSavedKeyPairs[key].balance +"</td>");
         const tdPrivate = $('<td><a href="#">'+jsonSavedKeyPairs[key].private_key+"</a></td>");
+        
+        tdPublic[0].onclick = function() {
+            if (utils.getSavedEncodePassword())
+                alerts.Alert("Your uncompressed public key", "To get uncompressed public key please decrypt your wallet");
+            else
+                alerts.Alert("Your uncompressed public key", "<div class='row' style='overflow: auto'><div class='col-md-12'>"+utils.getKeyPairFromWIF(privkey).Q.getEncoded(false).toString('hex')+"</div></div>");
+        };
         
         tdPrivate[0].onclick = function() {
             if (utils.getSavedEncodePassword())
