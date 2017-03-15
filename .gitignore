@@ -1,2 +1,4 @@
 *.crt
 *.key
+config.bat
+node_modules

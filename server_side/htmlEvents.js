@@ -275,7 +275,7 @@ $('#btnNewKeyPairReady').click(function (e) {
     e.preventDefault();
     
     jQuery('#add_new_keypair').modal('hide');
-    const password = $('#inputNewKeyPairPassword').val();
+    const password = $("#divNewKeyPairPassword").is(":visible") ? $('#inputNewKeyPairPassword').val() : "";
     
     if (!utils.isValidEncodePassword(password))
     {
