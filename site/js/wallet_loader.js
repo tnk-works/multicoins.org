@@ -1,7 +1,7 @@
 
 var jsUrls = [
-    'https://raw.githubusercontent.com/3s3s/multicoins.org/master/site/js/wallet.js'];
-    //'/js/wallet.js'];
+    //'https://raw.githubusercontent.com/3s3s/multicoins.org/master/site/js/wallet.js'];
+    '/js/wallet.js'];
     
 var g_loaded = 0.0;
 var g_total = 1024*1024*25;
